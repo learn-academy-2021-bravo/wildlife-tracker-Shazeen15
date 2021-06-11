@@ -28,8 +28,17 @@ class AnimalsController < ApplicationController
         end
     end
     # Story: As the consumer of the API, when I view a specific animal, I can also see a list sightings of that animal.
+    # animals get /animals/:id/sightings=>animals#sightingsbyanimal
     def sightingsbyanimal
-        
+        animal = Animal.find(params[:id])
+        sightings = Sighting.all
+        sightings.each do |sight|
+            if sight.animal_id == animal.id
+                render json: sight
+            else
+                render json: sight.errors
+            end
+        end
     end
     
     
