@@ -41,10 +41,31 @@ class AnimalsController < ApplicationController
         end
         render json: all_sights
     end
+    # Story: As the consumer of the API, I can submit sighting data along with new animals in 1 api call
+    # Look into accepts_nested_attributes_for
+    # POST /animals(.:format)=>animals#create
+    def create
+        animal = Animal.create(animal_params)
+        if animal.valid?
+            render json: animal
+        else
+        r   ender json: animal.errors
+        end
+    end
+
+    # def create
+    #     @recipe = current_user.recipes.build(recipe_params)
+    #     if @recipe.save
+    #         flash[:success] = "New recipe created correctly."
+    #         redirect_to @recipe
+    #     else
+    #       render 'new'
+    #     end
+    # end 
     
     
     private
     def animal_params
-        params.require(:animal).permit(:common_name, :latin_name, :kingdom)
+        params.require(:animal).permit(:common_name, :latin_name, :kingdom, sightings_attributes: [:id, :date, :latitude, :longitude, :animal_id])
     end
 end
