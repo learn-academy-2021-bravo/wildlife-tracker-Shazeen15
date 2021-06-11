@@ -27,6 +27,10 @@ class AnimalsController < ApplicationController
         render json: animal.errors
         end
     end
+    # Story: As the consumer of the API, when I view a specific animal, I can also see a list sightings of that animal.
+    def sightingsbyanimal
+        
+    end
     
     
     private
