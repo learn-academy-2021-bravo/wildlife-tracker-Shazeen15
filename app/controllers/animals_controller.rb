@@ -32,13 +32,14 @@ class AnimalsController < ApplicationController
     def sightingsbyanimal
         animal = Animal.find(params[:id])
         sightings = Sighting.all
-        sightings.each do |sight|
+        all_sights = sightings.select do |sight|
             if sight.animal_id == animal.id
-                render json: sight
+                sight
             else
-                render json: sight.errors
+                sight.errors
             end
         end
+        render json: all_sights
     end
     
     
