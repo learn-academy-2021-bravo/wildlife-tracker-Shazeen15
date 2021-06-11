@@ -19,14 +19,14 @@ class AnimalsController < ApplicationController
     
     # As the consumer of the API I can destroy a animal in the database.
     # DELETE /animals/:id(.:format) => animals#destroy
-def destroy
-    animal = Animal.find(params[:id])
-    if animal.destroy
-      render json: animal
-    else
-      render json: animal.errors
+    def destroy
+        animal = Animal.find(params[:id])
+        if animal.destroy
+        render json: animal
+        else
+        render json: animal.errors
+        end
     end
-  end
     
     
     private
