@@ -12,9 +12,18 @@ class SightingsController < ApplicationController
         end
     end
     
-    
     # Story: As the consumer of the API I can destroy an animal sighting in the database.
+    # DELETE /sightings/:id(.:format)=>sightings#destroy
+    def destroy
+        sighting = Sighting.find(params[:id])
+        if sighting.destroy
+        render json: sighting
+        else
+        render json: sighting.errors
+        end
+    end
     # Story: As the consumer of the API, when I view a specific animal, I can also see a list sightings of that animal.
+    
     # Story: As the consumer of the API, I can run a report to list all sightings during a given time period.
     # Hint: Your controller can look something like this:
     # class SightingsController < ApplicationController
